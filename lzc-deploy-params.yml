@@ -1,0 +1,68 @@
+params:
+  - id: max_content_length
+    type: number
+    name: "Max Content Length"
+    description: "Maximum sync content size in MiB (default: 10)"
+    default_value: 10
+
+  - id: smtp_host
+    type: string
+    name: "SMTP Host"
+    description: "The hostname or IP address of the SMTP server for sending emails"
+
+  - id: smtp_port
+    type: number
+    name: "SMTP Port"
+    description: "The port number of the SMTP server (default: 587)"
+    default_value: 587
+
+  - id: smtp_username
+    type: string
+    name: "SMTP Username"
+    description: "Username for authenticating with the SMTP server"
+
+  - id: smtp_password
+    type: string
+    name: "SMTP Password"
+    description: "Password for authenticating with the SMTP server"
+
+  - id: smtp_sender
+    type: string
+    name: "SMTP Sender"
+    description: "Email address of the sender. If not provided, the username will be used."
+
+  - id: smtp_ssl
+    type: bool
+    name: "SMTP SSL"
+    description: "Enable SSL/TLS encryption mode. Set to true for port 465 (immediate TLS handshake). Set to false for port 587 (STARTTLS upgrade). Default is false for modern STARTTLS."
+    default_value: false
+
+locales:
+  zh:
+    max_content_length:
+      name: "最大内容长度"
+      description: "最大同步内容大小，单位：MiB（默认 10）"
+
+    smtp_host:
+      name: "SMTP 主机"
+      description: "SMTP 服务器的主机名或 IP 地址，用于发送电子邮件"
+
+    smtp_port:
+      name: "SMTP 端口"
+      description: "SMTP 服务器的端口号（默认 587）"
+
+    smtp_username:
+      name: "SMTP 用户名"
+      description: "用于向 SMTP 服务器进行身份验证的用户名"
+
+    smtp_password:
+      name: "SMTP 密码"
+      description: "用于向 SMTP 服务器进行身份验证的密码"
+
+    smtp_sender:
+      name: "SMTP 发件人"
+      description: "电子邮件的发件人地址。如果未提供该字段，则将使用用户名。"
+
+    smtp_ssl:
+      name: "SMTP SSL 模式"
+      description: "启用 SSL/TLS 加密模式。端口 465 设置为 true（立即进行 TLS 握手），端口 587 设置为 false（使用 STARTTLS 升级）。默认为 false，适用于现代的 STARTTLS 方式。"
