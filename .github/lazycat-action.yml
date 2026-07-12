@@ -1,0 +1,41 @@
+version: 1
+project:
+  root: .
+  build_config: lzc-build.yml
+  package_file: package.yml
+  output: dist/gcopy.lpk
+update:
+  strategy: publish
+  allow_downgrade: false
+  version_source:
+    type: image
+    image: gcopy
+build:
+  run_buildscript: false
+images:
+  - id: gcopy
+    target: service
+    service: gcopy
+    source: llaoj/gcopy
+    channel: stable
+    tag_regex: '^v?[0-9]+\.[0-9]+\.[0-9]+$'
+    delivery:
+      mode: lazycat
+  - id: frontend
+    target: service
+    service: gcopy-frontend
+    source: llaoj/gcopy-frontend
+    channel: stable
+    tag_regex: '^v?[0-9]+\.[0-9]+\.[0-9]+$'
+    delivery:
+      mode: lazycat
+stores:
+  official:
+    enabled: true
+    skip_if_version_exists: true
+  private:
+    enabled: true
+    skip_if_version_exists: true
+    name: GCopy
+    summary: 支持文字、截图和文件的跨设备剪切板同步工具
+

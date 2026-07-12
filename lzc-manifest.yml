@@ -1,10 +1,3 @@
-name: GCopy
-package: community.lazycat.app.gcopy
-min_os_version: 1.3.8
-version: 1.4.9
-description: "一个剪切板同步的工具, 支持文字、截图和文件"
-homepage: https://github.com/llaoj/gcopy
-author: llaoj
 application:
   subdomain: gcopy
   background_task: true
@@ -20,29 +13,12 @@ application:
 
 services:
   gcopy:
-    # llaoj/gcopy:v1.4.9
-    container_name: gcopy
+    # upstream: llaoj/gcopy:v1.4.9
     image: registry.lazycat.cloud/czyt/llaoj/gcopy:75f9cbc4127e91ac
-    ports:
-      - "3376:3376"
     command: --app-key={{ stable_secret "appkey$110" }} --max-content-length={{ .U.max_content_length }} --smtp-host={{ .U.smtp_host }} --smtp-port={{ .U.smtp_port }}  --smtp-username={{ .U.smtp_username }} --smtp-password="{{ .U.smtp_password }}" --smtp-sender={{ .U.smtp_sender }} --smtp-ssl={{ .U.smtp_ssl }}
 
   gcopy-frontend:
-    container_name: gcopy-frontend
-    # llaoj/gcopy-frontend:v1.4.9
+    # upstream: llaoj/gcopy-frontend:v1.4.9
     image: registry.lazycat.cloud/czyt/llaoj/gcopy-frontend:62b54f345419d1a5
-    restart: always
-    ports:
-      - "3375:3375"
-
     depends_on:
       - gcopy
-
-locales:
-  zh:
-    name: "GCopy"
-    description: "一个剪切板同步的工具, 支持文字、截图和文件."
-
-  en:
-    name: "GCopy"
-    description: "A clipboard synchronization service for different devices that can synchronize text, screenshots, and files."
