@@ -1,11 +1,10 @@
 package: community.lazycat.app.gcopy
-version: 1.4.9
+version: 2.0.3
 name: GCopy
 description: "一个剪切板同步工具，支持文字、截图和文件"
 min_os_version: 1.5.0
 homepage: https://github.com/llaoj/gcopy
 author: llaoj
-
 locales:
   zh:
     name: "GCopy"
@@ -13,4 +12,3 @@ locales:
   en:
     name: "GCopy"
     description: "A clipboard synchronization service for text, screenshots, and files"
-

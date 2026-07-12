@@ -3,22 +3,18 @@ application:
   background_task: true
   public_path:
     - /
-
   upstreams:
     - location: /
       backend: http://gcopy-frontend:3375/
-
     - location: /api/v1
       backend: http://gcopy:3376/
-
 services:
   gcopy:
-    # upstream: llaoj/gcopy:v1.4.9
-    image: registry.lazycat.cloud/czyt/llaoj/gcopy:75f9cbc4127e91ac
+    # upstream: llaoj/gcopy:v2.0.3
+    image: registry.lazycat.cloud/czyt/llaoj/gcopy:29069839c32a949c
     command: --app-key={{ stable_secret "appkey$110" }} --max-content-length={{ .U.max_content_length }} --smtp-host={{ .U.smtp_host }} --smtp-port={{ .U.smtp_port }}  --smtp-username={{ .U.smtp_username }} --smtp-password="{{ .U.smtp_password }}" --smtp-sender={{ .U.smtp_sender }} --smtp-ssl={{ .U.smtp_ssl }}
-
   gcopy-frontend:
-    # upstream: llaoj/gcopy-frontend:v1.4.9
-    image: registry.lazycat.cloud/czyt/llaoj/gcopy-frontend:62b54f345419d1a5
+    # upstream: llaoj/gcopy-frontend:v1.5.5
+    image: registry.lazycat.cloud/czyt/llaoj/gcopy-frontend:eb27d0596ac6f203
     depends_on:
       - gcopy
