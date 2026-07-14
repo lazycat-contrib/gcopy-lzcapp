@@ -1,51 +1,73 @@
 params:
+  - id: use_token_auth
+    type: bool
+    name: "Use Token Authentication"
+    description: "Enable token authentication without SMTP. When disabled, GCopy uses email verification through the SMTP settings below."
+    default_value: "false"
+    optional: true
+
   - id: max_content_length
-    type: number
+    type: string
     name: "Max Content Length"
     description: "Maximum sync content size in MiB (default: 10)"
-    default_value: 10
+    default_value: "10"
+    optional: true
 
   - id: smtp_host
     type: string
     name: "SMTP Host"
-    description: "The hostname or IP address of the SMTP server for sending emails"
+    description: "SMTP server hostname or IP address. Required only when token authentication is disabled."
+    default_value: ""
+    optional: true
 
   - id: smtp_port
-    type: number
+    type: string
     name: "SMTP Port"
-    description: "The port number of the SMTP server (default: 587)"
-    default_value: 587
+    description: "SMTP server port, usually 587 for STARTTLS or 465 for implicit TLS."
+    default_value: "587"
+    optional: true
 
   - id: smtp_username
     type: string
     name: "SMTP Username"
-    description: "Username for authenticating with the SMTP server"
+    description: "SMTP authentication username. Required only when token authentication is disabled."
+    default_value: ""
+    optional: true
 
   - id: smtp_password
-    type: string
+    type: secret
     name: "SMTP Password"
-    description: "Password for authenticating with the SMTP server"
+    description: "SMTP authentication password. Required only when token authentication is disabled."
+    default_value: ""
+    optional: true
 
   - id: smtp_sender
     type: string
     name: "SMTP Sender"
     description: "Email address of the sender. If not provided, the username will be used."
+    default_value: ""
+    optional: true
 
   - id: smtp_ssl
     type: bool
     name: "SMTP SSL"
     description: "Enable SSL/TLS encryption mode. Set to true for port 465 (immediate TLS handshake). Set to false for port 587 (STARTTLS upgrade). Default is false for modern STARTTLS."
-    default_value: false
+    default_value: "false"
+    optional: true
 
 locales:
   zh:
+    use_token_auth:
+      name: "使用 Token 认证"
+      description: "开启后无需配置 SMTP，用户使用相同的 6 位 Token 登录；关闭时使用下方 SMTP 配置发送邮箱验证码。"
+
     max_content_length:
       name: "最大内容长度"
       description: "最大同步内容大小，单位：MiB（默认 10）"
 
     smtp_host:
       name: "SMTP 主机"
-      description: "SMTP 服务器的主机名或 IP 地址，用于发送电子邮件"
+      description: "SMTP 服务器的主机名或 IP 地址；仅关闭 Token 认证时需要。"
 
     smtp_port:
       name: "SMTP 端口"
@@ -53,11 +75,11 @@ locales:
 
     smtp_username:
       name: "SMTP 用户名"
-      description: "用于向 SMTP 服务器进行身份验证的用户名"
+      description: "用于向 SMTP 服务器进行身份验证的用户名；仅关闭 Token 认证时需要。"
 
     smtp_password:
       name: "SMTP 密码"
-      description: "用于向 SMTP 服务器进行身份验证的密码"
+      description: "用于向 SMTP 服务器进行身份验证的密码；仅关闭 Token 认证时需要。"
 
     smtp_sender:
       name: "SMTP 发件人"

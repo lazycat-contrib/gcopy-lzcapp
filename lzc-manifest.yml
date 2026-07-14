@@ -3,18 +3,32 @@ application:
   background_task: true
   public_path:
     - /
+  injects:
+    - id: open-save-chooser
+      on: browser
+      when:
+        - "/*"
+      do:
+        - src: file:///lzcapp/pkg/content/lazycat-injects/lzc-file-chooser-inject.js
   upstreams:
     - location: /
-      backend: http://gcopy-frontend:3375/
-    - location: /api/v1
-      backend: http://gcopy:3376/
+      backend: http://gcopy:3375/
 services:
   gcopy:
     # upstream: llaoj/gcopy:v2.0.3
     image: registry.lazycat.cloud/czyt/llaoj/gcopy:29069839c32a949c
-    command: --app-key={{ stable_secret "appkey$110" }} --max-content-length={{ .U.max_content_length }} --smtp-host={{ .U.smtp_host }} --smtp-port={{ .U.smtp_port }}  --smtp-username={{ .U.smtp_username }} --smtp-password="{{ .U.smtp_password }}" --smtp-sender={{ .U.smtp_sender }} --smtp-ssl={{ .U.smtp_ssl }}
-  gcopy-frontend:
-    # upstream: llaoj/gcopy-frontend:v1.5.5
-    image: registry.lazycat.cloud/czyt/llaoj/gcopy-frontend:eb27d0596ac6f203
-    depends_on:
-      - gcopy
+    environment:
+      - GCOPY_APP_KEY={{ stable_secret "appkey$110" }}
+      - GCOPY_LISTEN=:3375
+      - GCOPY_MAX_CONTENT_LENGTH={{ .U.max_content_length }}
+{{if .U.use_token_auth}}
+      - GCOPY_AUTH_MODE=token
+{{else}}
+      - GCOPY_AUTH_MODE=email
+      - GCOPY_SMTP_HOST={{ .U.smtp_host }}
+      - GCOPY_SMTP_PORT={{ .U.smtp_port }}
+      - GCOPY_SMTP_USERNAME={{ .U.smtp_username }}
+      - GCOPY_SMTP_PASSWORD={{ .U.smtp_password }}
+      - GCOPY_SMTP_SENDER={{ .U.smtp_sender }}
+      - GCOPY_SMTP_SSL={{ .U.smtp_ssl }}
+{{end}}
