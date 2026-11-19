@@ -15,8 +15,8 @@ application:
       backend: http://gcopy:3375/
 services:
   gcopy:
-    # upstream: llaoj/gcopy:v2.0.3
-    image: registry.lazycat.cloud/czyt/llaoj/gcopy:29069839c32a949c
+    # upstream: llaoj/gcopy:v2.1.14
+    image: registry.lazycat.cloud/czyt/llaoj/gcopy:8220f0a124340efd
     environment:
       - GCOPY_APP_KEY={{ stable_secret "appkey$110" }}
       - GCOPY_LISTEN=:3375

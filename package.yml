@@ -1,6 +1,6 @@
 package: community.lazycat.app.gcopy
 license: MIT
-version: 2.0.3
+version: 2.1.14
 name: GCopy
 description: "一个剪切板同步工具，支持文字、截图和文件"
 min_os_version: 1.5.0
